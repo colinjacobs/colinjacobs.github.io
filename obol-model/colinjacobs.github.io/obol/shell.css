@@ -1,0 +1,159 @@
+@import url('./core/theme.css');
+
+* , *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  overflow: hidden;
+}
+
+/* scanline overlay — same as portfolio */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, var(--scan) 3px, var(--scan) 4px);
+  pointer-events: none;
+  z-index: 9000;
+}
+
+#desktop {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--taskbar-h));
+  background:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  overflow: hidden;
+}
+
+/* ── WINDOWS ── */
+.os-window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border-bright);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  min-width: 280px;
+  min-height: 180px;
+}
+.os-window.focused {
+  border-color: var(--amber-dim);
+}
+
+.os-window-titlebar {
+  height: var(--titlebar-h);
+  flex-shrink: 0;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border-bright);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  cursor: grab;
+  user-select: none;
+}
+.os-window.focused .os-window-titlebar {
+  background: var(--surface3);
+}
+.os-window-title {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-mid);
+  text-transform: uppercase;
+}
+.os-window.focused .os-window-title {
+  color: var(--amber-glow);
+}
+.os-window-controls { display: flex; gap: 4px; }
+.os-window-btn {
+  width: 20px; height: 20px;
+  background: transparent;
+  border: 1px solid var(--border-bright);
+  color: var(--text-mid);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+}
+.os-window-btn:hover { color: var(--amber); border-color: var(--amber-dim); }
+.os-window-btn.close:hover { color: var(--red); border-color: var(--red); }
+
+.os-window-content {
+  flex: 1;
+  overflow: auto;
+  padding: 0;
+  min-height: 0;
+}
+
+.os-window-resize-handle {
+  position: absolute;
+  right: 0; bottom: 0;
+  width: 14px; height: 14px;
+  cursor: nwse-resize;
+}
+.os-window-resize-handle::after {
+  content: '';
+  position: absolute;
+  right: 2px; bottom: 2px;
+  width: 8px; height: 8px;
+  border-right: 2px solid var(--border-bright);
+  border-bottom: 2px solid var(--border-bright);
+}
+
+/* ── TASKBAR ── */
+#taskbar {
+  height: var(--taskbar-h);
+  background: rgba(2,4,7,0.97);
+  border-top: 1px solid var(--border-bright);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  gap: 16px;
+}
+.taskbar-launchers, .taskbar-open-windows {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.taskbar-launch-btn, .taskbar-window-btn {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  background: transparent;
+  color: var(--text-mid);
+  border: 1px solid var(--border-bright);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.taskbar-launch-btn:hover, .taskbar-window-btn:hover {
+  color: var(--amber);
+  border-color: var(--amber-dim);
+}
+.taskbar-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.taskbar-clock {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+}
+
+/* status dot — identical convention to the portfolio */
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber-dim); transition: background 0.3s; }
+.status-dot.ready   { background: var(--green); animation: blink 2.4s ease-in-out infinite; }
+.status-dot.loading { background: var(--amber); animation: blink 0.6s ease-in-out infinite; }
+.status-dot.error   { background: var(--red); }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.2; } }
