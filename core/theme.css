@@ -1,0 +1,48 @@
+/* ============================================================
+   THEME — lifted directly from the portfolio (index.html)
+   Single source of truth. The shell and the portfolio should
+   never visually drift apart — change values here, not in
+   individual app stylesheets.
+   ============================================================ */
+:root {
+  /* surfaces */
+  --bg:            #020407;
+  --surface:       #080b10;
+  --surface2:      #0c1018;
+  --surface3:      #111620;
+
+  /* accent — amber is primary, green is reserved for status/ready states */
+  --amber:         #e8a020;
+  --amber-dim:     #7a4f08;
+  --amber-mid:     #b07818;
+  --amber-glow:    #f5c050;
+  --green:         #2ec87a;
+  --green-dim:     #0f4a28;
+  --red:           #c83018;
+
+  /* text */
+  --text:          #c0ae88;
+  --text-bright:   #e8d8b0;
+  --text-dim:      #4a4030;
+  --text-mid:      #786850;
+
+  /* borders */
+  --border:        #181410;
+  --border-mid:    #282010;
+  --border-bright: #3a2c14;
+
+  /* fx */
+  --scan:          rgba(232,160,32,0.025);
+  --grid-line:     rgba(232,160,32,0.05);
+
+  /* shell-specific (new, but derived from the above) */
+  --window-radius: 0px;           /* hard edges — no rounded corners anywhere */
+  --titlebar-h:    34px;
+  --taskbar-h:     40px;
+}
+
+/* Fonts loaded via <link> in index.html:
+   Share Tech Mono — terminal/label text, status lines, monospace data
+   Orbitron        — display headings, window titles, branding
+   Rajdhani        — body/UI text inside app windows
+*/
